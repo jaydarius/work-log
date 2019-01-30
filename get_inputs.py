@@ -2,10 +2,19 @@ import os
 
 from datetime import datetime
 
+def clear_screen():
+	os.system("cls" if os.name == "nt" else "clear")
+
+def pause():
+    # Wont work in Treehouse Workspaces :)
+    cmd = "pause" if os.name == "nt" else "read -rsp $'Press any key to continue . . .\n' -n 1 key"
+    os.system(cmd)
+    return None
+
 # Continuously ask the user to add date
 def get_date_from_user():
     while True: 
-        try:  # Give the date
+        try:  
             print( "Date of the task\nPlease use DD/MM/YYYY\n")
             date = input("> ")
             # Ensure that date format is valid
@@ -19,10 +28,10 @@ def get_date_from_user():
             clear_screen()
             continue
 
-# Contrinuously ask the user to add title
+# Continuously ask the user to add title
 def get_title_from_user():
     while True:
-        try:  # Give title of task
+        try: 
             print("Title of the task\n")
             title = input("> ")
             if len(title) == 0:
@@ -34,8 +43,9 @@ def get_title_from_user():
             pause()
             clear_screen()
             continue
-        clear_screen()     
+         
 
+# Continuously ask the user to add time
 def get_time_from_user():
     while True:
         try:  # Give time spent on task
@@ -54,5 +64,5 @@ def get_time_from_user():
 def get_notes_from_user():
     while True:
         print("Notes (optional)\n")
-        clear_screen()
+        
         return input("> ")
