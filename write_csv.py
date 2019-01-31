@@ -8,6 +8,18 @@ def csv_insert(work_log):
     
         writer.writerow(work_log)
 
+def csv_read():
+    with open('work-log.csv', newline='') as f:
+        reader = csv.reader(f, delimiter = ',')
+        rows = list(reader)
+        
+        for row in rows:
+        # if a row contains the search
+            if row[0] == '7/20/2033':
+            # print the row
+                print(row)
+        
+
 # TESTING!
 if __name__ == "__main__":
     work_log = {}
@@ -27,3 +39,5 @@ if __name__ == "__main__":
     }
 
     csv_insert(work_log2)
+
+    csv_read()

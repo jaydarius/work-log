@@ -60,7 +60,7 @@ if __name__ == "__main__":
             print(  # Search Menu
                 "Do you want to search by:\n"
                 "a) Exact Date\n"
-                "b) Range of Dates\n"
+                "b) Range of Dates\n"  #extra credit
                 "c) Exact Search\n"
                 "d) Regex Pattern\n"
                 "e) Return to Main Menu\n"
@@ -68,6 +68,8 @@ if __name__ == "__main__":
             
             choice = input("> ")
             choice = choice.lower()
+            clear_screen()
+
             
             # create a function to display the record; will be used for searches a - d
                 # show date
@@ -83,8 +85,9 @@ if __name__ == "__main__":
                 # deleted the currently viewed result
                 # return to the search menu form the currently viewed result
 
-            # if a
-                # ensure valid date is used
+            if choice == 'a':
+                date = get_date_from_user()
+                # pass the date into a function to read csv
             # if b
             # if c
             # if d
