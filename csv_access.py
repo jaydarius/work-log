@@ -2,7 +2,7 @@ import os
 import csv
 
 def csv_insert(work_log):
-    with open('work-log.csv', 'a') as f:
+    with open('work-log.csv', 'a', newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
     
@@ -10,15 +10,16 @@ def csv_insert(work_log):
 
 def csv_read():
     with open('work-log.csv', newline='') as f:
-        reader = csv.reader(f, delimiter = ',')
+        fieldnames = ['date', 'title', 'time_spent', 'notes']
+        reader = csv.DictReader(f, fieldnames=fieldnames)
         rows = list(reader)
         
         for row in rows:
-        # if a row contains the search
-            if row[0] == '7/20/2033':
+            # if a row contains the search
+            # if row[0] == '7/20/2033':
             # print the row
-                print(row)
-        
+            print(row['date'])
+             
 
 # TESTING!
 if __name__ == "__main__":
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 
     work_log2 = {
         'date': '7/20/2033', 
-        'title': 'Boom Dyna',
+        'title': 'Record',
         'time_spent': 20,
         'notes': ''
     }
