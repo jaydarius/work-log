@@ -2,8 +2,8 @@ import os
 
 from datetime import datetime
 
-def clear_screen():
-	os.system("cls" if os.name == "nt" else "clear")
+from app import clear_screen
+
 
 def pause():
     # Wont work in Treehouse Workspaces :)
@@ -49,7 +49,7 @@ def get_title_from_user():
 def get_time_from_user():
     while True:
         try:  # Give time spent on task
-            print("Time spent on the task (rounded)\n")
+            print("Minutes spent on the task (rounded)\n")
             time_spent = input("> ")
             time_spent = int(time_spent)  
             clear_screen()
@@ -61,8 +61,8 @@ def get_time_from_user():
             clear_screen()
             continue
 
+# Continuously ask the user to add notes
 def get_notes_from_user():
     while True:
         print("Notes (optional)\n")
-        
         return input("> ")
