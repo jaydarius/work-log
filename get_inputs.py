@@ -67,3 +67,19 @@ def get_notes_from_user():
     while True:
         print("Notes (optional)\n")
         return input("> ")
+
+# Continuously ask the user to enter a keyword
+def get_keyword_from_user():
+    while True:
+        try: 
+            print("Search by keyword\n")
+            title = input("> ")
+            if len(title) == 0:
+                raise NameError("Please enter a valid keywprd.")
+            clear_screen()
+            return title
+        except NameError as e:
+            print(e)
+            pause()
+            clear_screen()
+            continue

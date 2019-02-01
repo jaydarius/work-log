@@ -8,7 +8,9 @@ def csv_insert(work_log):
     
         writer.writerow(work_log)
 
-def csv_read():
+def csv_read(search):
+    func_return = None
+
     with open('work-log.csv', newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         reader = csv.DictReader(f, fieldnames=fieldnames)
@@ -16,9 +18,11 @@ def csv_read():
         
         for row in rows:
             # if a row contains the search
-            # if row[0] == '7/20/2033':
-            # print the row
-            print(row['date'])
+            if row['date'] == search:
+            # return the row
+                func_return = row
+        
+    return func_return
              
 
 # TESTING!
@@ -41,4 +45,4 @@ if __name__ == "__main__":
 
     csv_insert(work_log2)
 
-    csv_read()
+    csv_read('7/20/2033')

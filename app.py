@@ -3,8 +3,9 @@ import csv
 from datetime import datetime
 
 from get_inputs import (get_date_from_user, get_title_from_user, 
-                        get_time_from_user, get_notes_from_user)
-from write_csv import csv_insert
+                        get_time_from_user, get_notes_from_user,
+                        pause, get_keyword_from_user)
+from csv_access import csv_insert, csv_read
 
 
 def clear_screen():
@@ -66,8 +67,8 @@ if __name__ == "__main__":
                 "e) Return to Main Menu\n"
             )
             
-            choice = input("> ")
-            choice = choice.lower()
+            search_menu_choice = input("> ")
+            search_menu_choice = choice.lower()
             clear_screen()
 
             
@@ -79,19 +80,27 @@ if __name__ == "__main__":
 
             # create a function that shows the amount of results found for a search a - d
 
-            # create a function that will allow me to:
+            # create a function that will allow me to:  # extra credit
                 # cycle through results
                 # edit the currently viewed result
                 # deleted the currently viewed result
                 # return to the search menu form the currently viewed result
 
-            if choice == 'a':
+            if search_menu_choice == 'a':
                 date = get_date_from_user()
                 # pass the date into a function to read csv
+                record = csv_read(date)
+                print(record)  # this will be a function that will display records content
+                pause()
             # if b
             # if c
+            while search_menu_choice == 'c':
+                keyword = get_keyword_from_user()
+             
+           
             # if d
             # if e
+
 
         
         if choice == "c":
