@@ -1,30 +1,11 @@
-import os
+import csv
 
-from datetime import datetime
+with open('names.csv', 'w', newline='') as csvfile:
+    fieldnames = ['first_name', 'last_name']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-def clear_screen():
-	os.system("cls" if os.name == "nt" else "clear")
-
-while True:    
-    try:
-        # Give date of task
-        
-        print(
-            "Date of the task\n"
-            "Please use DD/MM/YYYY\n"
-        )
-        date_input = input("> ")
-        # Ensure that date format is valid
-        parsed_date = datetime.strptime(date_input, '%m/%d/%Y')
-        
-    except ValueError:
-        print("\n{} doesn't seem to be a valid date and time.".format(date_input))
-        os.system("pause")
-        clear_screen()
-    else:
-        break
-clear_screen()
-print("move")
-    
-
+    writer.writeheader()
+    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
             
