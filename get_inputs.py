@@ -18,10 +18,12 @@ def get_date_from_user():
         try:  
             print( "Date of the task\nPlease use DD/MM/YYYY\n")
             date = input("> ")
+           
             # Ensure that date format is valid
-            parsed_date = datetime.strptime(date, '%m/%d/%Y')
+            parsed_date = datetime.strptime(date, '%d/%m/%Y')
+            formatted_date = parsed_date.strftime('%d/%m/%Y')
             clear_screen()
-            return date
+            return formatted_date
         except ValueError:
             print("\n{} doesn't seem to be a valid date and time."
                   .format(date))
@@ -75,7 +77,7 @@ def get_keyword_from_user():
             print("Search by keyword\n")
             title = input("> ")
             if len(title) == 0:
-                raise NameError("Please enter a valid keywprd.")
+                raise NameError("Please enter a valid keyword.")
             clear_screen()
             return title
         except NameError as e:

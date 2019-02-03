@@ -37,8 +37,14 @@ def print_record(record):
         f"Time Spent: {record['time_spent']}\n"
         f"Notes: {record['notes']}\n")
 
-
-work_log = {}
+def add_entry(date, title, time_spent, notes):
+    record = {}
+    record.update([
+        ('date', date), 
+        ('title', title),
+        ('time_spent', time_spent),
+        ('notes', notes)])
+    insert_record(record)
 
 
 if __name__ == "__main__":
@@ -62,18 +68,12 @@ if __name__ == "__main__":
             title = get_title_from_user()
             time_spent = get_time_from_user()
             notes = get_notes_from_user() 
-
-            work_log.update([
-                ('date', date), 
-                ('title', title),
-                ('time_spent', time_spent),
-                ('notes', notes)
-            ])
-            insert_record(work_log)
+           
+            add_entry(date, title, time_spent, notes)
             clear_screen()
-
             input("The entry has been added! Press enter to return to the menu.")
 
+        # Follow the 'Search' route
         while choice == "b":
             search_menu()
             
