@@ -1,48 +1,58 @@
 import os
 import csv
 
-def csv_insert(work_log):
+def open_csv(csv_file):
+    records = []
+
+    with open(csv_file, newline='') as f:
+        fieldnames = ['date', 'title', 'time_spent', 'notes']
+        reader = csv.DictReader(f, fieldnames=fieldnames)
+        records = list(reader)
+    
+    return records
+
+def insert_record(work_log):
     with open('work-log.csv', 'a', newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
     
         writer.writerow(work_log)
 
-def csv_read(search):
-    func_return = None
+def date_search(search):
+    record = {}
 
-    with open('work-log.csv', newline='') as f:
-        fieldnames = ['date', 'title', 'time_spent', 'notes']
-        reader = csv.DictReader(f, fieldnames=fieldnames)
-        rows = list(reader)
+    recs = open_csv('work-log.csv')
         
-        for row in rows:
-            # if a row contains the search
-            if row['date'] == search:
-            # return the row
-                func_return = row
-        
-    return func_return
-             
+    for rec in recs:
+        # if a record contains the date
+        if rec['date'] == search:
+        # return the row
+            record = rec
+    
+    return record
+
+# string is a search
+# must pull up all records matching the string
+# loop through each row
+    # inside each row look at title and notes to contain the string
+def keyword_search(search):
+    record_list = []
+
+    recs = open_csv('work-log.csv')
+    
+    for rec in recs:
+        # if a row contains the search
+        if search in rec['title']:
+            record_list.append(rec)
+        elif search in rec['notes']:
+            record_list.append(rec)
+
+    return record_list 
 
 # TESTING!
 if __name__ == "__main__":
-    work_log = {}
 
-    work_log.update([
-        ('date', '1/30/2020'), 
-        ('title', 'Test Title'),
-        ('time_spent', '45'),
-        ('notes', 'Testing is fun, pal')
-    ])
+    print(keyword_search('20'))
 
-    work_log2 = {
-        'date': '7/20/2033', 
-        'title': 'Record',
-        'time_spent': 20,
-        'notes': ''
-    }
-
-    csv_insert(work_log2)
-
-    csv_read('7/20/2033')
+    
+    
