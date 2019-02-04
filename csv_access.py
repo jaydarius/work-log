@@ -1,5 +1,7 @@
 import os
 import csv
+import re
+
 
 def open_csv(csv_file):
     records = []
@@ -19,7 +21,7 @@ def insert_record(work_log):
         writer.writerow(work_log)
 
 def date_search(search):
-    record = {}
+    records = []
 
     recs = open_csv('work-log.csv')
         
@@ -27,32 +29,57 @@ def date_search(search):
         # if a record contains the date
         if rec['date'] == search:
         # return the row
-            record = rec
+            records.append(rec)
     
-    return record
+    return records
 
-# string is a search
-# must pull up all records matching the string
-# loop through each row
-    # inside each row look at title and notes to contain the string
 def keyword_search(search):
-    record_list = []
+    records = []
 
     recs = open_csv('work-log.csv')
     
     for rec in recs:
         # if a row contains the search
         if search in rec['title']:
-            record_list.append(rec)
+            records.append(rec)
         elif search in rec['notes']:
-            record_list.append(rec)
+            records.append(rec)
 
-    return record_list 
+    return records
+
+def regex_search(search):
+    data = ""
+    records = []
+    search = str(search)
+    
+    recs = open_csv('work-log.csv')
+    
+    # for each record apply a regex search.
+    for rec in recs:
+        if re.findall(r'{}'.format(search), rec['title']):
+            records.append(rec)
+        elif re.findall(r'{}'.format(search), rec['notes']):
+            records.append(rec)
+    
+    return records
+
+def time_search(search):
+    records = []
+    search = str(search)
+
+    recs = open_csv('work-log.csv')
+        
+    for rec in recs:
+        # if a record contains the date
+        if rec['time_spent'] == search:
+        # return the row
+            records.append(rec)
+    
+    return records    
 
 # TESTING!
 if __name__ == "__main__":
 
-    print(keyword_search('20'))
-
+    print(time_search(90))
     
     

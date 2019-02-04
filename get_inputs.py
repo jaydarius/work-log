@@ -13,7 +13,7 @@ def pause():
     return None
 
 # Continuously ask the user to add date
-def get_date_from_user():
+def get_date():
     while True: 
         try:  
             print( "Date of the task\nPlease use DD/MM/YYYY\n")
@@ -32,7 +32,7 @@ def get_date_from_user():
             continue
 
 # Continuously ask the user to add title
-def get_title_from_user():
+def get_title():
     while True:
         try: 
             print("Title of the task\n")
@@ -49,7 +49,7 @@ def get_title_from_user():
          
 
 # Continuously ask the user to add time
-def get_time_from_user():
+def get_time():
     while True:
         try:  # Give time spent on task
             print("Minutes spent on the task (rounded)\n")
@@ -65,23 +65,41 @@ def get_time_from_user():
             continue
 
 # Continuously ask the user to add notes
-def get_notes_from_user():
+def get_notes():
     while True:
         print("Notes (optional)\n")
         return input("> ")
 
 # Continuously ask the user to enter a keyword
-def get_keyword_from_user():
+def get_keyword():
     while True:
         try: 
-            print("Search by keyword\n")
-            title = input("> ")
-            if len(title) == 0:
+            print("Keyword\n")
+            keyword = input("> ")
+            if len(keyword) == 0:
                 raise NameError("Please enter a valid keyword.")
             clear_screen()
-            return title
+            return keyword
         except NameError as e:
             print(e)
             pause()
             clear_screen()
             continue
+
+def get_regex():
+    while True:
+        try: 
+            print("RegEx\n")
+            regex = input("> ")
+            if len(regex) == 0:
+                raise NameError("Please enter a valid RegEx.")
+            clear_screen()
+            return regex
+        except NameError as e:
+            print(e)
+            pause()
+            clear_screen()
+            continue
+
+if __name__ == "__main__":
+    get_regex()
