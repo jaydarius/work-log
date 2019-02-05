@@ -62,17 +62,14 @@ def search_meta(getf, searchf):
 def show_each_record_one_at_a_time(records):
     # records = list returned from search criteria - NOT entire csv
     index = 0
-    whole_csv = open_csv('work-log.csv')
+    origin_csv = open_csv('work-log.csv')
 
     while True:
         record = records[index]
 
         clear_screen()
-        print(records)
-        print("\nResult {} out of {}".format(index+1, len(records)))
+        print("Result {} out of {}".format(index+1, len(records)))
         print_record(record)
-        
-
 
         print("Next, Back, Edit, Delete, Return to Search Menu")
         user_choice = input("> ")
@@ -96,19 +93,15 @@ def show_each_record_one_at_a_time(records):
 
         # Delete Record
         if user_choice == "d":
-            print(whole_csv)
+            os.remove("work-log.csv")
 
-            for r in whole_csv:
+            for r in origin_csv:
                 if r != record:
-                    insert_record(r, 'w')
-           
+                    insert_record(r, 'a')
 
-            # for r in records:
-            #     print(r, "\n")
-            #     insert_record(r, 'w')
-            
+            clear_screen()
+            print(""""{}" log has been deleted!\n""".format(record['title']))       
             pause()
-            user_choice = 'r'
             break
             
 
