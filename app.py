@@ -55,16 +55,52 @@ def search_meta(getf, searchf):
 
     if not records:
         print("Not found!\n")
+        pause()
     else:
-        for record in records:
-                print_record(record)
-    pause()
+        show_each_record_one_at_a_time(records)
 
-# create a function that will allow me to:  # extra credit
-    # cycle through results
-    # edit the currently viewed result
-    # deleted the currently viewed result
-    # return to the search menu form the currently viewed result
+def show_each_record_one_at_a_time(records):
+    # records = list returned from search
+    index = 0
+
+    while True:
+        record = records[index]
+
+        clear_screen()
+        print("Result {} out of {}".format(index+1, len(records)))
+        print_record(record)
+
+        print("Next, Back, Edit, Delete, Return to Search Menu")
+        user_choice = input("> ")
+
+        if user_choice == "n":
+            index += 1
+            continue
+
+        if user_choice == "b":
+            index -= 1
+            continue
+        
+        # Edit Row
+        if user_choice == "e":
+            # what do you want to edit?
+            # display the 4 items
+            # show the 1 item
+            # get the user input for the 1 item
+            # 
+            pass
+
+        # Delete Row
+        if user_choice == "d":
+            with open('work-log.csv', 'r') as inp, open('work-log-edit.csv', 'w') as out:
+                writer = csv.writer(out)
+                for row in csv.reader(inp):
+                    if row[0] != record['date'] and row[1] != record['title']:
+                        writer.writerow(row)
+
+        if user_choice == "r":
+            break    
+
 
 if __name__ == "__main__":
     clear_screen()

@@ -101,5 +101,6 @@ def get_regex():
             clear_screen()
             continue
 
+# Testing!
 if __name__ == "__main__":
     get_regex()
