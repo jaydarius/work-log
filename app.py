@@ -64,10 +64,12 @@ def show_each_record_one_at_a_time(records):
     index = 0
 
     while True:
+        print(records)
         record = records[index]
 
         clear_screen()
-        print("Result {} out of {}".format(index+1, len(records)))
+        print(records)
+        print("\nResult {} out of {}".format(index+1, len(records)))
         print_record(record)
 
         print("Next, Back, Edit, Delete, Return to Search Menu")
@@ -87,22 +89,44 @@ def show_each_record_one_at_a_time(records):
             # display the 4 items
             # show the 1 item
             # get the user input for the 1 item
-            # 
+            
             pass
 
         # Delete Row
         if user_choice == "d":
-            with open('work-log.csv', 'r') as inp, open('work-log-edit.csv', 'w') as out:
+            # read the origin csv and write all rows except deleted to edited csv
+            with open('work-log.csv', 'r', newline='') as inp, open('work-log-edit.csv', 'w', newline='') as out:
                 writer = csv.writer(out)
                 for row in csv.reader(inp):
-                    if row[0] != record['date'] and row[1] != record['title']:
+                    # This delete will delete multiple entries with the same title
+                    print("{} and {} and {} and {}".format(record['title'], record['date'], row[1], row[0]))
+                    pause()
+                    if row[1] != record['title'] and row[0] != record['date']:
                         writer.writerow(row)
+            
+            # read the edited csv and overwrite the origin csv with all rows
+            with open('work-log-edit.csv', 'r', newline='') as inp, open('work-log.csv', 'w', newline='') as out:
+                writer = csv.writer(out)
+                for row in csv.reader(inp):
+                    writer.writerow(row)
+            clear_screen()
+            print("Entry has been deleted! Returning to search menu.\n")
+            pause()
+            user_choice = 'r'
+            break
+            
 
         if user_choice == "r":
             break    
 
 
 if __name__ == "__main__":
+    ### TESTING
+    with open('test-data.csv', 'r', newline='') as inp, open('work-log.csv', 'w', newline='') as out:
+        writer = csv.writer(out)
+        for row in csv.reader(inp):
+            writer.writerow(row)
+    ###
     clear_screen()
         
     logging = True

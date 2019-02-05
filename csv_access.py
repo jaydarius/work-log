@@ -13,12 +13,12 @@ def open_csv(csv_file):
     
     return records
 
-def insert_record(work_log):
+def insert_record(record):
     with open('work-log.csv', 'a', newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
     
-        writer.writerow(work_log)
+        writer.writerow(record)
 
 def date_search(search):
     records = []
