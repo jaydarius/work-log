@@ -5,7 +5,7 @@ from datetime import datetime
 from get_inputs import (get_date, get_title, get_regex, 
                         get_time, get_notes,
                         pause, get_keyword)
-from csv_access import (insert_record, date_search,
+from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
                         time_search)
 
@@ -47,7 +47,7 @@ def add_entry(date, title, time_spent, notes):
         ('title', title),
         ('time_spent', time_spent),
         ('notes', notes)])
-    insert_record(record)
+    insert_record(record, 'a')
 
 def search_meta(getf, searchf):
     user_input = getf()
@@ -60,17 +60,19 @@ def search_meta(getf, searchf):
         show_each_record_one_at_a_time(records)
 
 def show_each_record_one_at_a_time(records):
-    # records = list returned from search
+    # records = list returned from search criteria - NOT entire csv
     index = 0
+    whole_csv = open_csv('work-log.csv')
 
     while True:
-        print(records)
         record = records[index]
 
         clear_screen()
         print(records)
         print("\nResult {} out of {}".format(index+1, len(records)))
         print_record(record)
+        
+
 
         print("Next, Back, Edit, Delete, Return to Search Menu")
         user_choice = input("> ")
@@ -83,7 +85,7 @@ def show_each_record_one_at_a_time(records):
             index -= 1
             continue
         
-        # Edit Row
+        # Edit Record
         if user_choice == "e":
             # what do you want to edit?
             # display the 4 items
@@ -92,25 +94,19 @@ def show_each_record_one_at_a_time(records):
             
             pass
 
-        # Delete Row
+        # Delete Record
         if user_choice == "d":
-            # read the origin csv and write all rows except deleted to edited csv
-            with open('work-log.csv', 'r', newline='') as inp, open('work-log-edit.csv', 'w', newline='') as out:
-                writer = csv.writer(out)
-                for row in csv.reader(inp):
-                    # This delete will delete multiple entries with the same title
-                    print("{} and {} and {} and {}".format(record['title'], record['date'], row[1], row[0]))
-                    pause()
-                    if row[1] != record['title'] and row[0] != record['date']:
-                        writer.writerow(row)
+            print(whole_csv)
+
+            for r in whole_csv:
+                if r != record:
+                    insert_record(r, 'w')
+           
+
+            # for r in records:
+            #     print(r, "\n")
+            #     insert_record(r, 'w')
             
-            # read the edited csv and overwrite the origin csv with all rows
-            with open('work-log-edit.csv', 'r', newline='') as inp, open('work-log.csv', 'w', newline='') as out:
-                writer = csv.writer(out)
-                for row in csv.reader(inp):
-                    writer.writerow(row)
-            clear_screen()
-            print("Entry has been deleted! Returning to search menu.\n")
             pause()
             user_choice = 'r'
             break

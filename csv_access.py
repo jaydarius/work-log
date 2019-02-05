@@ -13,13 +13,14 @@ def open_csv(csv_file):
     
     return records
 
-def insert_record(record):
-    with open('work-log.csv', 'a', newline='') as f:
+def insert_record(record, permission):
+    with open('work-log.csv', permission, newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
     
         writer.writerow(record)
 
+# open work-log.csv and use date criteria to return records 
 def date_search(search):
     records = []
 
@@ -33,6 +34,7 @@ def date_search(search):
     
     return records
 
+# open work-log.csv and use keyword criteria to return records 
 def keyword_search(search):
     records = []
 
@@ -47,6 +49,7 @@ def keyword_search(search):
 
     return records
 
+# open work-log.csv and use regex criteria to return records 
 def regex_search(search):
     data = ""
     records = []
@@ -63,6 +66,7 @@ def regex_search(search):
     
     return records
 
+# open work-log.csv and use time criteria to return records 
 def time_search(search):
     records = []
     search = str(search)
