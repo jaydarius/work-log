@@ -2,6 +2,7 @@ import os
 import csv
 import re
 
+from display import print_record, clear_screen, pause
 
 def open_csv(csv_file):
     records = []
@@ -80,6 +81,71 @@ def time_search(search):
             records.append(rec)
     
     return records    
+
+
+def del_record():
+    # origin csv is inside show_each_record_one_at_a_time
+    os.remove("work-log.csv")
+
+    for r in origin_csv:
+        if r != record:
+            insert_record(r, 'a')
+
+    clear_screen()
+    print(""""{}" log has been deleted!\n""".format(record['title']))       
+    pause()
+
+
+def del_record_item(key, value, record):  # item is 1 of 4 record values
+    # origin csv is inside show_each_record_one_at_a_time
+    os.remove("work-log.csv")
+    e_record = record  # copy the origin record
+
+    e_record[key] = value
+
+    print(e_record)
+    # for r in origin_csv:
+    #     if r != record:
+    #         insert_record(r, 'a')
+
+    # clear_screen()
+    # print(""""{}" log has been deleted!\n""".format(record['title']))       
+    # pause()
+
+def edit_record(record):
+    editing = True
+
+    while editing:
+        clear_screen()
+        print_record(record)
+        print("What would you like to edit?\n"
+              "[D]ate\n"
+              "[T]itle\n"
+              "Time [S]pent\n"
+              "[N]otes\n"
+              "[R]eturn to Search Menu\n")
+
+        edit_choice = input("> ")
+
+        if edit_choice.lower() == "d":
+            date_edit = input(">")
+
+            del_record_item('date', date_edit, record)
+
+            pause()
+            pass
+
+        if edit_choice.lower() == "t":
+            pass
+
+        if edit_choice.lower() == "s":
+            pass
+
+        if edit_choice.lower() == "n":
+            pass
+
+        if edit_choice.lower() == "r":
+            break
 
 # TESTING!
 if __name__ == "__main__":

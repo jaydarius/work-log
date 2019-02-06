@@ -6,12 +6,6 @@ from datetime import datetime
 def clear_screen():
 	os.system("cls" if os.name == "nt" else "clear")
 
-def pause():
-    # Wont work in Treehouse Workspaces :)
-    cmd = "pause" if os.name == "nt" else "read -rsp $'Press any key to continue . . .\n' -n 1 key"
-    os.system(cmd)
-    return None
-
 # Continuously ask the user to add date
 def get_date():
     while True: 

@@ -4,41 +4,13 @@ from datetime import datetime
 
 from get_inputs import (get_date, get_title, get_regex, 
                         get_time, get_notes,
-                        pause, get_keyword)
+                        get_keyword)
 from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
-                        time_search)
+                        time_search, del_record, edit_record)
+from display import (print_record, main_menu, search_menu,
+                     clear_screen, pause)
 
-
-def clear_screen():
-	os.system("cls" if os.name == "nt" else "clear")
-
-def main_menu():
-    print( 
-        "== WORK LOG==\n"
-        "What would you like to do?\n"
-        "a) Add new entry\n"
-        "b) Search existing entries\n"
-        "c) Quit program\n"
-        )
-
-def search_menu():
-    print( 
-        "Do you want to search by:\n"
-        "a) Exact Date\n"
-        "b) Range of Dates\n"  #extra credit
-        "c) Exact Search\n"
-        "d) Regex Pattern\n"
-        "e) Time Spent\n"
-        "f) Return to Main Menu\n"
-)
-
-def print_record(record):
-    print(
-        f"Date: {record['date']}\n"
-        f"Title: {record['title']}\n"
-        f"Time Spent: {record['time_spent']}\n"
-        f"Notes: {record['notes']}\n")
 
 def add_entry(date, title, time_spent, notes):
     record = {}
@@ -84,26 +56,12 @@ def show_each_record_one_at_a_time(records):
         
         # Edit Record
         if user_choice == "e":
-            # what do you want to edit?
-            # display the 4 items
-            # show the 1 item
-            # get the user input for the 1 item
-            
-            pass
+            edit_record(record)
 
         # Delete Record
         if user_choice == "d":
-            os.remove("work-log.csv")
-
-            for r in origin_csv:
-                if r != record:
-                    insert_record(r, 'a')
-
-            clear_screen()
-            print(""""{}" log has been deleted!\n""".format(record['title']))       
-            pause()
+            del_record()
             break
-            
 
         if user_choice == "r":
             break    
