@@ -7,7 +7,7 @@ from get_inputs import (get_date, get_title, get_regex,
                         get_keyword)
 from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
-                        time_search, del_record, edit_record)
+                        time_search, del_record, edit_menu)
 from display import (print_record, main_menu, search_menu,
                      clear_screen, pause)
 
@@ -29,9 +29,9 @@ def search_meta(getf, searchf):
         print("Not found!\n")
         pause()
     else:
-        show_each_record_one_at_a_time(records)
+        display_search(records)
 
-def show_each_record_one_at_a_time(records):
+def display_search(records):
     # records = list returned from search criteria - NOT entire csv
     index = 0
     origin_csv = open_csv('work-log.csv')
@@ -56,11 +56,14 @@ def show_each_record_one_at_a_time(records):
         
         # Edit Record
         if user_choice == "e":
-            edit_record(record)
+            edit_menu(record, origin_csv)
 
         # Delete Record
         if user_choice == "d":
             del_record()
+            clear_screen()
+            print(""""{}" log has been deleted!\n""".format(record['title']))       
+            pause()
             break
 
         if user_choice == "r":

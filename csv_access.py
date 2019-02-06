@@ -1,6 +1,7 @@
 import os
 import csv
 import re
+import copy
 
 from display import print_record, clear_screen, pause
 
@@ -83,7 +84,7 @@ def time_search(search):
     return records    
 
 
-def del_record():
+def del_record(record, origin_csv):
     # origin csv is inside show_each_record_one_at_a_time
     os.remove("work-log.csv")
 
@@ -91,28 +92,16 @@ def del_record():
         if r != record:
             insert_record(r, 'a')
 
-    clear_screen()
-    print(""""{}" log has been deleted!\n""".format(record['title']))       
-    pause()
-
-
-def del_record_item(key, value, record):  # item is 1 of 4 record values
-    # origin csv is inside show_each_record_one_at_a_time
-    os.remove("work-log.csv")
-    e_record = record  # copy the origin record
+def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
+    e_record = copy.copy(record)  # copy the origin record
 
     e_record[key] = value
 
-    print(e_record)
-    # for r in origin_csv:
-    #     if r != record:
-    #         insert_record(r, 'a')
+    del_record(record, origin_csv)
+    insert_record(e_record, 'a')
+    return e_record
 
-    # clear_screen()
-    # print(""""{}" log has been deleted!\n""".format(record['title']))       
-    # pause()
-
-def edit_record(record):
+def edit_menu(record, origin_csv):
     editing = True
 
     while editing:
@@ -128,21 +117,53 @@ def edit_record(record):
         edit_choice = input("> ")
 
         if edit_choice.lower() == "d":
-            date_edit = input(">")
+            clear_screen()
+            print("Edit Date")
+            # must validate date
+            new_item = input("> ")
 
-            del_record_item('date', date_edit, record)
-
+            e_record = edit_item('date', new_item, record, origin_csv)
+            record = e_record
+            clear_screen()
+            print("Date successfully updated!\n")
             pause()
-            pass
 
         if edit_choice.lower() == "t":
-            pass
+            clear_screen()
+            print("Edit Title")
+            # must validate date
+            new_item = input("> ")
+
+            e_record = edit_item('title', new_item, record, origin_csv)
+            record = e_record
+            clear_screen()
+            print("Title successfully updated!\n")
+            pause()
+
 
         if edit_choice.lower() == "s":
-            pass
+            clear_screen()
+            print("Edit Time Spent")
+            # must validate
+            new_item = input("> ")
+
+            e_record = edit_item('time_spent', new_item, record, origin_csv)
+            record = e_record
+            clear_screen()
+            print("Time spent successfully updated!\n")
+            pause()
 
         if edit_choice.lower() == "n":
-            pass
+            clear_screen()
+            print("Edit Notes")
+            # must validate date
+            new_item = input("> ")
+
+            e_record = edit_item('notes', new_item, record, origin_csv)
+            record = e_record
+            clear_screen()
+            print("Notes successfully updated!\n")
+            pause()
 
         if edit_choice.lower() == "r":
             break
