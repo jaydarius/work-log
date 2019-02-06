@@ -7,9 +7,10 @@ from get_inputs import (get_date, get_title, get_regex,
                         get_keyword)
 from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
-                        time_search, del_record, edit_menu)
+                        time_search, del_record)
 from display import (print_record, main_menu, search_menu,
                      clear_screen, pause)
+from search_route import search_records, display_search
 
 
 def add_entry(date, title, time_spent, notes):
@@ -21,57 +22,9 @@ def add_entry(date, title, time_spent, notes):
         ('notes', notes)])
     insert_record(record, 'a')
 
-def search_meta(getf, searchf):
-    user_input = getf()
-    records = searchf(user_input)  
-
-    if not records:
-        print("Not found!\n")
-        pause()
-    else:
-        display_search(records)
-
-def display_search(records):
-    # records = list returned from search criteria - NOT entire csv
-    index = 0
-    origin_csv = open_csv('work-log.csv')
-
-    while True:
-        record = records[index]
-
-        clear_screen()
-        print("Result {} out of {}".format(index+1, len(records)))
-        print_record(record)
-
-        print("Next, Back, Edit, Delete, Return to Search Menu")
-        user_choice = input("> ")
-
-        if user_choice == "n":
-            index += 1
-            continue
-
-        if user_choice == "b":
-            index -= 1
-            continue
-        
-        # Edit Record
-        if user_choice == "e":
-            edit_menu(record, origin_csv)
-
-        # Delete Record
-        if user_choice == "d":
-            del_record()
-            clear_screen()
-            print(""""{}" log has been deleted!\n""".format(record['title']))       
-            pause()
-            break
-
-        if user_choice == "r":
-            break    
-
 
 if __name__ == "__main__":
-    ### TESTING
+    ### Initialize Test Data
     with open('test-data.csv', 'r', newline='') as inp, open('work-log.csv', 'w', newline='') as out:
         writer = csv.writer(out)
         for row in csv.reader(inp):
@@ -112,18 +65,18 @@ if __name__ == "__main__":
             clear_screen()
 
             if choice == 'a':
-                search_meta(get_date, date_search)
+                search_records(get_date, date_search)
 
             # if b  # extra credit
 
             if choice == 'c':
-                search_meta(get_keyword, keyword_search)
+                search_records(get_keyword, keyword_search)
             
             if choice == 'd':
-                search_meta(get_regex, regex_search)
+                search_records(get_regex, regex_search)
 
             if choice == 'e':
-                search_meta(get_time, time_search)
+                search_records(get_time, time_search)
 
             if choice == 'f':
                 break

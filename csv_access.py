@@ -83,7 +83,6 @@ def time_search(search):
     
     return records    
 
-
 def del_record(record, origin_csv):
     # origin csv is inside show_each_record_one_at_a_time
     os.remove("work-log.csv")
@@ -94,79 +93,12 @@ def del_record(record, origin_csv):
 
 def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
     e_record = copy.copy(record)  # copy the origin record
-
     e_record[key] = value
 
     del_record(record, origin_csv)
     insert_record(e_record, 'a')
     return e_record
 
-def edit_menu(record, origin_csv):
-    editing = True
-
-    while editing:
-        clear_screen()
-        print_record(record)
-        print("What would you like to edit?\n"
-              "[D]ate\n"
-              "[T]itle\n"
-              "Time [S]pent\n"
-              "[N]otes\n"
-              "[R]eturn to Search Menu\n")
-
-        edit_choice = input("> ")
-
-        if edit_choice.lower() == "d":
-            clear_screen()
-            print("Edit Date")
-            # must validate date
-            new_item = input("> ")
-
-            e_record = edit_item('date', new_item, record, origin_csv)
-            record = e_record
-            clear_screen()
-            print("Date successfully updated!\n")
-            pause()
-
-        if edit_choice.lower() == "t":
-            clear_screen()
-            print("Edit Title")
-            # must validate date
-            new_item = input("> ")
-
-            e_record = edit_item('title', new_item, record, origin_csv)
-            record = e_record
-            clear_screen()
-            print("Title successfully updated!\n")
-            pause()
-
-
-        if edit_choice.lower() == "s":
-            clear_screen()
-            print("Edit Time Spent")
-            # must validate
-            new_item = input("> ")
-
-            e_record = edit_item('time_spent', new_item, record, origin_csv)
-            record = e_record
-            clear_screen()
-            print("Time spent successfully updated!\n")
-            pause()
-
-        if edit_choice.lower() == "n":
-            clear_screen()
-            print("Edit Notes")
-            # must validate date
-            new_item = input("> ")
-
-            e_record = edit_item('notes', new_item, record, origin_csv)
-            record = e_record
-            clear_screen()
-            print("Notes successfully updated!\n")
-            pause()
-
-        if edit_choice.lower() == "r":
-            break
 
 # TESTING!
 if __name__ == "__main__":
