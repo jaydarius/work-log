@@ -2,6 +2,7 @@ import os
 
 from datetime import datetime
 
+from display import pause
 
 def clear_screen():
 	os.system("cls" if os.name == "nt" else "clear")

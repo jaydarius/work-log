@@ -8,7 +8,8 @@ def main_menu():
           "c) Quit program\n")
 
 def search_menu():
-    print("Do you want to search by:\n"
+    print("== SEARCH MENU ==\n"
+          "Do you want to search by:\n"
           "a) Exact Date\n"
           "b) Range of Dates\n"  #extra credit
           "c) Exact Search\n"
@@ -17,12 +18,13 @@ def search_menu():
           "f) Return to Main Menu\n")
 
 def edit_menu():
-    print("What would you like to edit?\n"
+    print("== EDIT MENU ==\n"
+          "What would you like to edit?\n"
           "a) Date\n"
           "b) Title\n"
           "c) Time Spent\n"
           "d) Notes\n"
-          "e) Return to Main Menu\n")
+          "e) Return to Search Menu\n")
 
 def page_menu(index, records):
     if index == 0:

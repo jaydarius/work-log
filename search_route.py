@@ -1,8 +1,15 @@
 from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
                         time_search, del_record)
+                        
 from edit_route import edit_record
-from display import pause, clear_screen, print_record, invalid_input, page_menu
+
+from display import (pause, clear_screen, print_record, invalid_input,
+                     page_menu, search_menu)
+                     
+from get_inputs import (get_date, get_title,
+                        get_time, get_notes,
+                        get_keyword, get_regex)
 
 def page_records(records):
     # records = list returned from search criteria - NOT entire csv
@@ -38,7 +45,7 @@ def page_records(records):
             edit_record(record, origin_csv)
             break
         elif user_choice == "d":
-            del_record()
+            del_record(record, origin_csv)
             clear_screen()
             print(""""{}" log has been deleted!\n""".format(record['title']))       
             pause()
@@ -59,5 +66,30 @@ def search_records(getf, searchf):
     else:
         page_records(records)
 
+def search_route():
+    searching = True
 
+    while searching:
+        search_menu()
+        
+        choice = input("> ")
+        choice = choice.lower()
+        
+        clear_screen()
+
+        if choice == 'a':
+            search_records(get_date, date_search)
+        # if b  # extra credit
+        elif choice == 'c':
+            search_records(get_keyword, keyword_search)
+        elif choice == 'd':
+            search_records(get_regex, regex_search)
+        elif choice == 'e':
+            search_records(get_time, time_search)
+        elif choice == 'f':
+            break
+        else:
+            invalid_input()
+
+        clear_screen()
 
