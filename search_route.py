@@ -2,9 +2,9 @@ from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
                         time_search, del_record)
 from edit_route import edit_record
-from display import pause, clear_screen, print_record
+from display import pause, clear_screen, print_record, invalid_input, page_menu
 
-def display_search(records):
+def page_records(records):
     # records = list returned from search criteria - NOT entire csv
     index = 0
     origin_csv = open_csv('work-log.csv')
@@ -12,39 +12,38 @@ def display_search(records):
     edited_record = None
     
     while searching:
-
         record = records[index]
 
         clear_screen()
         print("Result {} out of {}".format(index+1, len(records)))
         print_record(record)
-
-        print("Next, Back, Edit, Delete, Return to Search Menu")
+        page_menu(index)
         user_choice = input("> ")
 
         if user_choice == "n":
             index += 1
             continue
-
-        if user_choice == "b":
-            index -= 1
+        elif user_choice == "b":
+            if index < 1:
+                print("\nCan't go back!\n")
+                pause()
+            else:
+                index -= 1
             continue
-        
-        # Edit Record
-        if user_choice == "e":
+        elif user_choice == "e":
             edit_record(record, origin_csv)
             break
-
-        # Delete Record
-        if user_choice == "d":
+        elif user_choice == "d":
             del_record()
             clear_screen()
             print(""""{}" log has been deleted!\n""".format(record['title']))       
             pause()
             break
-
-        if user_choice == "r":
+        elif user_choice == "r":
             break    
+        else:
+            invalid_input()
+
 
 def search_records(getf, searchf):
     user_input = getf()
@@ -54,7 +53,7 @@ def search_records(getf, searchf):
         print("Not found!\n")
         pause()
     else:
-        display_search(records)
+        page_records(records)
 
 
 

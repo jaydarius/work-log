@@ -10,7 +10,7 @@ from csv_access import (insert_record, open_csv, date_search,
                         time_search, del_record)
 from display import (print_record, main_menu, search_menu,
                      clear_screen, pause)
-from search_route import search_records, display_search
+from search_route import search_records, page_records
 
 
 def add_entry(date, title, time_spent, notes):

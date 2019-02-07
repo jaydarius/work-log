@@ -18,17 +18,28 @@ def search_menu():
 
 def edit_menu():
     print("What would you like to edit?\n"
-          "[D]ate\n"
-          "[T]itle\n"
-          "Time [S]pent\n"
-          "[N]otes\n"
-          "[R]eturn to Search Menu\n")
+          "a) Date\n"
+          "b) Title\n"
+          "c) Time Spent\n"
+          "d) Notes\n"
+          "e) Return to Main Menu\n")
+
+def page_menu(index):
+    if index == 0:
+        print("[N]ext, [E]dit, [D]elete, [R]eturn to Search Menu")
+    else:
+        print("[N]ext, [B]ack, [E]dit, [D]elete, [R]eturn to Search Menu")
+
 
 def print_record(record):
     print(f"Date: {record['date']}\n"
           f"Title: {record['title']}\n"
           f"Time Spent: {record['time_spent']}\n"
           f"Notes: {record['notes']}\n")
+
+def invalid_input():
+    print("\nNot a valid option!\n")
+    pause()
 
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")

@@ -1,5 +1,5 @@
 from display import (pause, clear_screen, print_record,
-                    edit_menu, search_menu)
+                    edit_menu, search_menu, invalid_input)
 from csv_access import edit_item
 
 
@@ -64,21 +64,19 @@ def edit_record(record, origin_csv):
 
         edit_choice = input("> ")
 
-        if edit_choice.lower() == "d":
+        if edit_choice.lower() == "a":
             edit = edit_date(record, origin_csv)
             record = edit
-
-        if edit_choice.lower() == "t":
+        elif edit_choice.lower() == "b":
             edit = edit_title(record, origin_csv)
             record = edit
-
-        if edit_choice.lower() == "s":
+        elif edit_choice.lower() == "c":
             edit = edit_time(record, origin_csv)
             record = edit
-
-        if edit_choice.lower() == "n":
+        elif edit_choice.lower() == "d":
             edit = edit_notes(record, origin_csv)
             record = edit
-
-        if edit_choice.lower() == "r":
+        elif edit_choice.lower() == "e":
             break
+        else:
+            invalid_input()
