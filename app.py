@@ -9,7 +9,7 @@ from csv_access import (insert_record, open_csv, date_search,
                         keyword_search, regex_search,
                         time_search, del_record)
 from display import (print_record, main_menu, search_menu,
-                     clear_screen, pause)
+                     clear_screen, pause, invalid_input)
 from search_route import search_records, page_records
 
 
@@ -54,37 +54,35 @@ if __name__ == "__main__":
             add_entry(date, title, time_spent, notes)
             clear_screen()
             input("The entry has been added! Press enter to return to the menu.")
-
-        # Follow the 'Search' route
-        while choice == "b":
-            search_menu()
+        elif choice == "b":
+            searching = True
             
-            choice = input("> ")
-            choice = choice.lower()
-            
-            clear_screen()
+            while searching:
+                search_menu()
+                
+                choice = input("> ")
+                choice = choice.lower()
+                
+                clear_screen()
 
-            if choice == 'a':
-                search_records(get_date, date_search)
+                if choice == 'a':
+                    search_records(get_date, date_search)
+                # if b  # extra credit
+                elif choice == 'c':
+                    search_records(get_keyword, keyword_search)
+                elif choice == 'd':
+                    search_records(get_regex, regex_search)
+                elif choice == 'e':
+                    search_records(get_time, time_search)
+                elif choice == 'f':
+                    main_menu()
+                else:
+                    invalid_input()
 
-            # if b  # extra credit
-
-            if choice == 'c':
-                search_records(get_keyword, keyword_search)
-            
-            if choice == 'd':
-                search_records(get_regex, regex_search)
-
-            if choice == 'e':
-                search_records(get_time, time_search)
-
-            if choice == 'f':
-                main_menu()
-
-            clear_screen()
-            
-        if choice == "c":
+                clear_screen()
+        elif choice == "c":
             print("Thanks for using the Work Log! See ya soon.")
             break
-
+        else:
+            invalid_input()
         

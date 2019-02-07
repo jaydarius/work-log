@@ -17,11 +17,15 @@ def page_records(records):
         clear_screen()
         print("Result {} out of {}".format(index+1, len(records)))
         print_record(record)
-        page_menu(index)
+        page_menu(index, records)
         user_choice = input("> ")
 
         if user_choice == "n":
-            index += 1
+            if index == (len(records) - 1):
+                print("\nCan't go forward!\n")
+                pause()
+            else:
+                index += 1
             continue
         elif user_choice == "b":
             if index < 1:

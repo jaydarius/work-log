@@ -24,9 +24,11 @@ def edit_menu():
           "d) Notes\n"
           "e) Return to Main Menu\n")
 
-def page_menu(index):
+def page_menu(index, records):
     if index == 0:
         print("[N]ext, [E]dit, [D]elete, [R]eturn to Search Menu")
+    elif index > len(records):
+        print("[B]ack, [E]dit, [D]elete, [R]eturn to Search Menu")
     else:
         print("[N]ext, [B]ack, [E]dit, [D]elete, [R]eturn to Search Menu")
 
