@@ -1,5 +1,5 @@
 from display import (pause, clear_screen, print_record,
-                    edit_menu)
+                    edit_menu, search_menu)
 from csv_access import edit_item
 
 
@@ -14,6 +14,7 @@ def edit_date(record, origin_csv):
     clear_screen()
     print("Date successfully updated!\n")
     pause()
+    return record
 
 def edit_title(record, origin_csv):
     clear_screen()
@@ -64,16 +65,20 @@ def edit_record(record, origin_csv):
         edit_choice = input("> ")
 
         if edit_choice.lower() == "d":
-            edit_date(record, origin_csv)
+            edit = edit_date(record, origin_csv)
+            record = edit
 
         if edit_choice.lower() == "t":
-            edit_title(record, origin_csv)
+            edit = edit_title(record, origin_csv)
+            record = edit
 
         if edit_choice.lower() == "s":
-            edit_time(record, origin_csv)     
+            edit = edit_time(record, origin_csv)
+            record = edit
 
         if edit_choice.lower() == "n":
-            edit_notes(record, origin_csv)
+            edit = edit_notes(record, origin_csv)
+            record = edit
 
-        if edit_choice.lower() == "r
+        if edit_choice.lower() == "r":
             break

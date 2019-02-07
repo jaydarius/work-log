@@ -79,9 +79,7 @@ if __name__ == "__main__":
                 search_records(get_time, time_search)
 
             if choice == 'f':
-                break
-            
-            choice = 'b' # stay in the Search Menu
+                main_menu()
 
             clear_screen()
             
