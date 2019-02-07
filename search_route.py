@@ -9,8 +9,10 @@ def display_search(records):
     index = 0
     origin_csv = open_csv('work-log.csv')
     searching = True
+    edited_record = None
     
     while searching:
+
         record = records[index]
 
         clear_screen()
@@ -31,6 +33,7 @@ def display_search(records):
         # Edit Record
         if user_choice == "e":
             edit_record(record, origin_csv)
+            break
 
         # Delete Record
         if user_choice == "d":
