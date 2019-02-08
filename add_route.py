@@ -10,7 +10,7 @@ from csv_access import insert_record
 from display import clear_screen, pause
 
 def add_route():
-    date = get_date('format')
+    date = get_date()
     title = get_title()
     time_spent = get_time()
     notes = get_notes() 

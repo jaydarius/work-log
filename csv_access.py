@@ -9,6 +9,7 @@ from display import (
     pause
 )
 
+
 def open_csv(csv_file):
     records = []
 

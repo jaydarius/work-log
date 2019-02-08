@@ -1,5 +1,6 @@
 import os
 
+
 def main_menu():
     print("== WORK LOG==\n"
           "What would you like to do?\n"
