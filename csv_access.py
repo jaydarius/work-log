@@ -11,6 +11,8 @@ from display import (
 
 
 def open_csv(csv_file):
+    """Open work-log.csv and return a list of records."""
+
     records = []
 
     with open(csv_file, newline='') as f:
@@ -27,41 +29,50 @@ def insert_record(record, permission):
     
         writer.writerow(record)
 
-# open work-log.csv and use date criteria to return records 
 def date_search(search):
-    records = []
+    """Search the csv for all records that match a date.
 
+    :param search: a string containing user's search criteria
+    :return: a list of the found records
+    """
+
+    records = []
     recs = open_csv('work-log.csv')
         
     for rec in recs:
-        # if a record contains the date
         if rec['date'] == search:
-        # return the row
             records.append(rec)
     
     return records
 
 def date_range_search(search):
-    records = []
+    """Search the csv for all records inside a date range.
 
+    :param search: a string containing user's search criteria
+    :return: a list of the found records
+    """
+
+    records = []
     recs = open_csv('work-log.csv')
         
     for rec in recs:
-        # if a record contains the date
         if rec['date'] in search:
-        # return the row
             records.append(rec)
     
     return records
 
-# open work-log.csv and use keyword criteria to return records 
-def keyword_search(search):
-    records = []
 
+def keyword_search(search):
+    """Search the csv for all records that match a keyword.
+
+    :param search: a string containing user's search criteria
+    :return: a list of the found records
+    """
+
+    records = []
     recs = open_csv('work-log.csv')
     
     for rec in recs:
-        # if a row contains the search
         if search in rec['title']:
             records.append(rec)
         elif search in rec['notes']:
@@ -69,15 +80,17 @@ def keyword_search(search):
 
     return records
 
-# open work-log.csv and use regex criteria to return records 
 def regex_search(search):
-    data = ""
+    """Search the csv for all records that match a RegEx.
+
+    :param search: a string containing user's search criteria
+    :return: a list of the found records
+    """
+
     records = []
     search = str(search)
-    
     recs = open_csv('work-log.csv')
     
-    # for each record apply a regex search.
     for rec in recs:
         if re.findall(r'{}'.format(search), rec['title']):
             records.append(rec)
@@ -86,17 +99,20 @@ def regex_search(search):
     
     return records
 
-# open work-log.csv and use time criteria to return records 
 def time_search(search):
+    """Search the csv for all records that match a unit of time.
+
+    :param search: an integer containing user's search criteria
+    :return: list of the found records
+    """
+    
     records = []
     search = str(search)
 
     recs = open_csv('work-log.csv')
         
     for rec in recs:
-        # if a record contains the date
         if rec['time_spent'] == search:
-        # return the row
             records.append(rec)
     
     return records    

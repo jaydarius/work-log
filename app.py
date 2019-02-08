@@ -20,7 +20,7 @@ if __name__ == "__main__":
     clear_screen()
         
     logging = True
-
+    
     while logging:
         clear_screen()
         main_menu()

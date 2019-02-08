@@ -2,6 +2,7 @@ from csv_access import (
     insert_record,
     open_csv,
     date_search,
+    date_range_search,
     keyword_search,
     regex_search,
     time_search,
