@@ -1,17 +1,29 @@
-from display import (pause, clear_screen, print_record,
-                    edit_menu, search_menu, invalid_input)
+from display import (
+    pause,
+    clear_screen,
+    print_record,
+    edit_menu, 
+    search_menu, 
+    invalid_input
+)
 from csv_access import edit_item
-from get_inputs import get_date, get_title, get_time, get_notes
+from get_inputs import (
+    get_date, 
+    get_title, 
+    get_time, 
+    get_notes
+)
 
 
 def edit_date(record, origin_csv):
     clear_screen()
     print("Edit Date")
     # must validate date
-    new_item = get_date()
+    new_item = get_date('format')
 
     e_record = edit_item('date', new_item, record, origin_csv)
     record = e_record
+
     clear_screen()
     print("Date successfully updated!\n")
     pause()

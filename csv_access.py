@@ -3,7 +3,11 @@ import csv
 import re
 import copy
 
-from display import print_record, clear_screen, pause
+from display import (
+    print_record,
+    clear_screen,
+    pause
+)
 
 def open_csv(csv_file):
     records = []
@@ -31,6 +35,19 @@ def date_search(search):
     for rec in recs:
         # if a record contains the date
         if rec['date'] == search:
+        # return the row
+            records.append(rec)
+    
+    return records
+
+def date_range_search(search):
+    records = []
+
+    recs = open_csv('work-log.csv')
+        
+    for rec in recs:
+        # if a record contains the date
+        if rec['date'] in search:
         # return the row
             records.append(rec)
     

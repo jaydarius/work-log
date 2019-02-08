@@ -1,11 +1,8 @@
 import os
+from datetime import datetime, timedelta
 
-from datetime import datetime
+from display import pause, clear_screen
 
-from display import pause
-
-def clear_screen():
-	os.system("cls" if os.name == "nt" else "clear")
 
 # Continuously ask the user to add date
 def get_date():
@@ -19,6 +16,24 @@ def get_date():
             formatted_date = parsed_date.strftime('%d/%m/%Y')
             clear_screen()
             return formatted_date
+        except ValueError:
+            print("\n{} doesn't seem to be a valid date and time."
+                  .format(date))
+            pause()
+            clear_screen()
+            continue
+
+def get_parsed_date():
+    while True: 
+        try:  
+            print( "Please use DD/MM/YYYY\n")
+            date = input("> ")
+           
+            # Ensure that date format is valid
+            parsed_date = datetime.strptime(date, '%d/%m/%Y')
+
+            clear_screen()
+            return parsed_date
         except ValueError:
             print("\n{} doesn't seem to be a valid date and time."
                   .format(date))
@@ -96,6 +111,18 @@ def get_regex():
             clear_screen()
             continue
 
+def get_date_range():
+    date_list = []
+    start = get_parsed_date()
+    end = get_parsed_date()
+    # generator
+    date_array = (start + timedelta(days=x) for x in range(0, (end-start).days))
+
+    for date_object in date_array:
+        date_list.append(date_object.strftime('%d/%m/%Y'))
+
+    return date_list
+
 # Testing!
 if __name__ == "__main__":
-    get_regex()
+    get_date_range()

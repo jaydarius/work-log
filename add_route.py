@@ -1,13 +1,16 @@
-from get_inputs import (get_date, get_title,
-                        get_time, get_notes,
-                        get_keyword, get_regex)
-
+from get_inputs import (
+    get_date, 
+    get_title,
+    get_time, 
+    get_notes,
+    get_keyword, 
+    get_regex
+    )
 from csv_access import insert_record
-
 from display import clear_screen, pause
 
 def add_route():
-    date = get_date()
+    date = get_date('format')
     title = get_title()
     time_spent = get_time()
     notes = get_notes() 

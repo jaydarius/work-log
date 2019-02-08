@@ -11,7 +11,7 @@ def search_menu():
     print("== SEARCH MENU ==\n"
           "Do you want to search by:\n"
           "a) Exact Date\n"
-          "b) Range of Dates\n"  #extra credit
+          "b) Range of Dates\n"  
           "c) Exact Search\n"
           "d) Regex Pattern\n"
           "e) Time Spent\n"
@@ -52,4 +52,5 @@ def pause():
     # Wont work in Treehouse Workspaces :)
     cmd = "pause" if os.name == "nt" else "read -rsp $'Press any key to continue . . .\n' -n 1 key"
     os.system(cmd)
+    
     return None

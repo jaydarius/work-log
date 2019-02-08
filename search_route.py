@@ -1,15 +1,30 @@
-from csv_access import (insert_record, open_csv, date_search,
-                        keyword_search, regex_search,
-                        time_search, del_record)
-                        
+from csv_access import (
+    insert_record,
+    open_csv,
+    date_search,
+    keyword_search,
+    regex_search,
+    time_search,
+    del_record
+)
 from edit_route import edit_record
-
-from display import (pause, clear_screen, print_record, invalid_input,
-                     page_menu, search_menu)
-                     
-from get_inputs import (get_date, get_title,
-                        get_time, get_notes,
-                        get_keyword, get_regex)
+from display import (
+    print_record,
+    clear_screen,
+    pause,
+    invalid_input,
+    page_menu,
+    search_menu
+)                    
+from get_inputs import (
+    get_date,
+    get_date_range, 
+    get_title, 
+    get_time, 
+    get_notes, 
+    get_keyword, 
+    get_regex
+)
 
 def page_records(records):
     # records = list returned from search criteria - NOT entire csv
@@ -79,7 +94,8 @@ def search_route():
 
         if choice == 'a':
             search_records(get_date, date_search)
-        # if b  # extra credit
+        elif choice == 'b':
+            search_records(get_date_range, date_range_search)
         elif choice == 'c':
             search_records(get_keyword, keyword_search)
         elif choice == 'd':

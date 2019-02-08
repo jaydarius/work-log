@@ -2,30 +2,21 @@ import os
 import csv
 from datetime import datetime
 
-from get_inputs import (get_date, get_title,
-                        get_time, get_notes,
-                        get_keyword, get_regex)
 
-from csv_access import (insert_record, open_csv, date_search,
-                        keyword_search, regex_search,
-                        time_search, del_record)
-from display import (print_record, main_menu, search_menu,
-                     clear_screen, pause, invalid_input)
-
-from search_route import search_records, page_records, search_route
-
+from display import (
+    main_menu,
+    clear_screen, 
+    invalid_input
+)
+from search_route import (
+    search_records,
+    page_records,
+    search_route
+)
 from add_route import add_route
 
 
-
-
 if __name__ == "__main__":
-    ### Initialize Test Data
-    with open('test-data.csv', 'r', newline='') as inp, open('work-log.csv', 'w', newline='') as out:
-        writer = csv.writer(out)
-        for row in csv.reader(inp):
-            writer.writerow(row)
-    ###
     clear_screen()
         
     logging = True
