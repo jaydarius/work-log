@@ -108,7 +108,6 @@ def time_search(search):
     
     records = []
     search = str(search)
-
     recs = open_csv('work-log.csv')
         
     for rec in recs:
@@ -118,7 +117,10 @@ def time_search(search):
     return records    
 
 def del_record(record, origin_csv):
-    # origin csv is inside show_each_record_one_at_a_time
+    """Remove work-log.csv and copy its records to a new work-log.csv
+       excluding the record marked for deletion.
+    
+    """
     os.remove("work-log.csv")
 
     for r in origin_csv:
