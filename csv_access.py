@@ -11,7 +11,10 @@ from display import (
 
 
 def open_csv(csv_file):
-    """Open work-log.csv and return a list of records."""
+    """Open work-log.csv and return a list of records.
+    
+    :param csv_file: string containing file in directory to open
+    """
 
     records = []
 
@@ -23,6 +26,13 @@ def open_csv(csv_file):
     return records
 
 def insert_record(record, permission):
+    """Adds a record to the CSV file.
+
+    :param record: dictionary containing the required fieldnames
+        date, title, time_spent, notes
+    :param permission: string containing file-mode to open the file with i.e 'a'
+    :return: None
+    """
     with open('work-log.csv', permission, newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -117,10 +127,15 @@ def time_search(search):
     return records    
 
 def del_record(record, origin_csv):
-    """Remove work-log.csv and copy its records to a new work-log.csv
-       excluding the record marked for deletion.
-    
     """
+    Remove work-log.csv and copy its records to a new work-log.csv
+    excluding the record marked for deletion.
+
+    :param record: dictionary marked for delection
+    :param origin_csv: list of records in work-log.csv 
+    :return: None
+    """
+
     os.remove("work-log.csv")
 
     for r in origin_csv:
@@ -128,6 +143,16 @@ def del_record(record, origin_csv):
             insert_record(r, 'a')
 
 def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
+    """
+    Create a copy of a record, edit it's key's value, 
+    delete the origin record, and insert the edited copy into work-log.csv
+
+    :param key: string of record that will be selected 
+    :param value: string of record that will be edited
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv  
+    :return: dictionary of the edited record
+    """
     e_record = copy.copy(record)  # copy the origin record
     e_record[key] = value
 

@@ -16,6 +16,13 @@ from get_inputs import (
 
 
 def edit_date(record, origin_csv):
+    """Edit a record's date value.
+
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv 
+    :return: dictionary that is edited record
+    """
+
     clear_screen()
     print("Edit Date")
     # must validate date
@@ -30,6 +37,13 @@ def edit_date(record, origin_csv):
     return record
 
 def edit_title(record, origin_csv):
+    """Edit a record's title value.
+
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv 
+    :return: dictionary that is edited record
+    """
+
     clear_screen()
     # must validate date
     new_item = get_title()
@@ -42,6 +56,13 @@ def edit_title(record, origin_csv):
     return record
 
 def edit_time(record, origin_csv):
+    """Edit a record's time spent value.
+
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv 
+    :return: dictionary that is edited record
+    """
+
     clear_screen()
     # must validate
     new_item = get_time()
@@ -54,6 +75,13 @@ def edit_time(record, origin_csv):
     return record
 
 def edit_notes(record, origin_csv):
+    """Edit a record's notes value.
+
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv 
+    :return: dictionary that is edited record
+    """
+
     clear_screen()
     # must validate notes
     new_item = get_notes()
@@ -66,6 +94,13 @@ def edit_notes(record, origin_csv):
     return record
 
 def edit_record(record, origin_csv):
+    """Continously prompt user to edit record.
+
+    :param record: dictionary marked for editing
+    :param origin_csv: list of records in work-log.csv 
+    :return: None
+    """
+
     editing = True
     origin_csv = origin_csv
     record = record

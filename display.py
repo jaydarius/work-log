@@ -28,6 +28,12 @@ def edit_menu():
           "e) Return to Search Menu\n")
 
 def page_menu(index, records):
+    """Print page menu according to position on list of record.
+    
+    :param index: integer of location on list
+    :param :
+    """
+
     if index == 0:
         print("[N]ext, [E]dit, [D]elete, [R]eturn to Search Menu")
     elif index > len(records):
