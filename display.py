@@ -28,16 +28,19 @@ def edit_menu():
           "e) Return to Search Menu\n")
 
 def page_menu(index, records):
-    """Print page menu according to position on list of record.
+    """Print page menu according to position on list of records
     
     :param index: integer of location on list
-    :param :
+    :param records: list of records returned from search
+    :return: None
     """
-
-    if index == 0:
-        print("[N]ext, [E]dit, [D]elete, [R]eturn to Search Menu")
-    elif index > len(records):
+    
+    if len(records) == 1:
+        print("[E]dit, [D]elete, [R]eturn to Search Menu")
+    elif index == (len(records)-1):
         print("[B]ack, [E]dit, [D]elete, [R]eturn to Search Menu")
+    elif index == 0:
+        print("[N]ext, [E]dit, [D]elete, [R]eturn to Search Menu")
     else:
         print("[N]ext, [B]ack, [E]dit, [D]elete, [R]eturn to Search Menu")
 
@@ -56,8 +59,7 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
     
 def pause():
-    # Wont work in Treehouse Workspaces :)
+    """Pause the display until user enters a key and return None"""
     cmd = "pause" if os.name == "nt" else "read -rsp $'Press any key to continue . . .\n' -n 1 key"
     os.system(cmd)
-    
-    return None
+

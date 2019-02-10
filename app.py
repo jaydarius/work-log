@@ -30,7 +30,6 @@ if __name__ == "__main__":
 
         clear_screen()
 
-        # Follow the 'Add new entry' route
         if choice == "a":
             add_route()
 

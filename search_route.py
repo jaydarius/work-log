@@ -28,7 +28,12 @@ from get_inputs import (
 )
 
 def page_records(records):
-    # records = list returned from search criteria - NOT entire csv
+    """Display each record with paging options.
+
+    :param records: list of records found with search criteria
+    :return:None
+    """
+
     index = 0
     origin_csv = open_csv('work-log.csv')
     searching = True
@@ -72,9 +77,15 @@ def page_records(records):
             invalid_input()
 
 
-def search_records(getf, searchf):
-    user_input = getf()
-    records = searchf(user_input)  
+def search_records(get_value, search):
+    """Locate matching records.
+
+    :param get_value: object containing user's input
+    :param search: function that will apply user's input
+    :return: None
+    """
+    user_input = get_value()
+    records = search(user_input)  
 
     if not records:
         print("Not found!\n")
@@ -83,6 +94,7 @@ def search_records(getf, searchf):
         page_records(records)
 
 def search_route():
+    """Select criteria to search for record(s) and return None"""
     searching = True
 
     while searching:

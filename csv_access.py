@@ -33,6 +33,7 @@ def insert_record(record, permission):
     :param permission: string containing file-mode to open the file with i.e 'a'
     :return: None
     """
+
     with open('work-log.csv', permission, newline='') as f:
         fieldnames = ['date', 'title', 'time_spent', 'notes']
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -153,11 +154,13 @@ def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
     :param origin_csv: list of records in work-log.csv  
     :return: dictionary of the edited record
     """
+
     e_record = copy.copy(record)  # copy the origin record
     e_record[key] = value
 
     del_record(record, origin_csv)
     insert_record(e_record, 'a')
+    
     return e_record
 
 

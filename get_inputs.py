@@ -4,16 +4,17 @@ from datetime import datetime, timedelta
 from display import pause, clear_screen
 
 
-# Continuously ask the user to add date
 def get_date():
+    """Ask the user to add date and return it in a string"""
+
     while True: 
         try:  
             print( "Date of the task\nPlease use DD/MM/YYYY\n")
+
             date = input("> ")
-           
-            # Ensure that date format is valid
             parsed_date = datetime.strptime(date, '%d/%m/%Y')
             formatted_date = parsed_date.strftime('%d/%m/%Y')
+
             clear_screen()
             return formatted_date
         except ValueError:
@@ -23,13 +24,21 @@ def get_date():
             clear_screen()
             continue
 
-def get_parsed_date():
+def get_parsed_date(index):
+    """Ask the user to add date
+    
+    :param index: string containing position of range (first or second)
+    :return: datetime object
+    """
+
     while True: 
-        try:  
-            print( "Please use DD/MM/YYYY\n")
+        try:
+            if index == 'first':  
+                print("First Date\nPlease use DD/MM/YYYY\n")
+            elif index == 'second':
+                print("Second Date\nPlease use DD/MM/YYYY\n")
+
             date = input("> ")
-           
-            # Ensure that date format is valid
             parsed_date = datetime.strptime(date, '%d/%m/%Y')
 
             clear_screen()
@@ -41,8 +50,23 @@ def get_parsed_date():
             clear_screen()
             continue
 
-# Continuously ask the user to add title
+def get_date_range():
+    """Ask the user to add 2 dates and return each date between in a list."""
+    
+    date_list = []
+    start = get_parsed_date("first")
+    end = get_parsed_date("second")
+
+    date_array = (start + timedelta(days=x) for x in range(0, (end-start).days))
+
+    for date_object in date_array:
+        date_list.append(date_object.strftime('%d/%m/%Y'))
+
+    return date_list
+
 def get_title():
+    """Ask the user to add title and return it in a string"""
+    
     while True:
         try: 
             print("Title of the task\n")
@@ -57,14 +81,15 @@ def get_title():
             clear_screen()
             continue
          
-
-# Continuously ask the user to add time
 def get_time():
+    """Ask the user to add time spent and return it as an integer"""
     while True:
-        try:  # Give time spent on task
+        try:  #
             print("Minutes spent on the task (rounded)\n")
+
             time_spent = input("> ")
             time_spent = int(time_spent)  
+
             clear_screen()
             return time_spent
         except ValueError:
@@ -74,14 +99,16 @@ def get_time():
             clear_screen()
             continue
 
-# Continuously ask the user to add notes
 def get_notes():
+    """Ask the user to add notes and return it in a string"""
+
     while True:
         print("Notes (optional)\n")
         return input("> ")
 
-# Continuously ask the user to enter a keyword
 def get_keyword():
+    """Ask the user to add date and return it in a string"""
+
     while True:
         try: 
             print("Keyword\n")
@@ -97,6 +124,8 @@ def get_keyword():
             continue
 
 def get_regex():
+    """Ask the user to add RegEx and return it in a string"""
+
     while True:
         try: 
             print("RegEx\n")
@@ -111,17 +140,7 @@ def get_regex():
             clear_screen()
             continue
 
-def get_date_range():
-    date_list = []
-    start = get_parsed_date()
-    end = get_parsed_date()
-    # generator
-    date_array = (start + timedelta(days=x) for x in range(0, (end-start).days))
 
-    for date_object in date_array:
-        date_list.append(date_object.strftime('%d/%m/%Y'))
-
-    return date_list
 
 # Testing!
 if __name__ == "__main__":

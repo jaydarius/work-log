@@ -25,9 +25,8 @@ def edit_date(record, origin_csv):
 
     clear_screen()
     print("Edit Date")
-    # must validate date
-    new_item = get_date('format')
 
+    new_item = get_date()
     e_record = edit_item('date', new_item, record, origin_csv)
     record = e_record
 
@@ -45,14 +44,16 @@ def edit_title(record, origin_csv):
     """
 
     clear_screen()
-    # must validate date
-    new_item = get_title()
+    print("Edit Title")
 
+    new_item = get_title()
     e_record = edit_item('title', new_item, record, origin_csv)
     record = e_record
+
     clear_screen()
     print("Title successfully updated!\n")
     pause()
+
     return record
 
 def edit_time(record, origin_csv):
@@ -64,14 +65,16 @@ def edit_time(record, origin_csv):
     """
 
     clear_screen()
-    # must validate
-    new_item = get_time()
+    print("Edit Time Spent")
 
+    new_item = get_time()
     e_record = edit_item('time_spent', new_item, record, origin_csv)
     record = e_record
+
     clear_screen()
     print("Time spent successfully updated!\n")
     pause()
+
     return record
 
 def edit_notes(record, origin_csv):
@@ -83,14 +86,16 @@ def edit_notes(record, origin_csv):
     """
 
     clear_screen()
-    # must validate notes
-    new_item = get_notes()
+    print("Edit Notes")
 
+    new_item = get_notes()
     e_record = edit_item('notes', new_item, record, origin_csv)
     record = e_record
+
     clear_screen()
     print("Notes successfully updated!\n")
     pause()
+
     return record
 
 def edit_record(record, origin_csv):
