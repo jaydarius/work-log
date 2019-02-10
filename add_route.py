@@ -20,6 +20,7 @@ def add_entry(date, title, time_spent, notes):
     :param notes: string containing notes
     :return: None
     """
+    
     record = {}
     record.update([
         ('date', date), 

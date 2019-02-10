@@ -97,7 +97,16 @@ def search_route():
     """Select criteria to search for record(s) and return None"""
     searching = True
 
+    
+
     while searching:
+        if open_csv("work-log.csv") == False:
+            searching = False
+
+            print("Work log is empty! Please add a new entry.\n")
+            pause()
+            break
+            
         search_menu()
         
         choice = input("> ")

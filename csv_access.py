@@ -15,15 +15,18 @@ def open_csv(csv_file):
     
     :param csv_file: string containing file in directory to open
     """
+    try:
+        records = []
 
-    records = []
-
-    with open(csv_file, newline='') as f:
-        fieldnames = ['date', 'title', 'time_spent', 'notes']
-        reader = csv.DictReader(f, fieldnames=fieldnames)
-        records = list(reader)
-    
-    return records
+        with open(csv_file, newline='') as f:
+            fieldnames = ['date', 'title', 'time_spent', 'notes']
+            reader = csv.DictReader(f, fieldnames=fieldnames)
+            records = list(reader)
+        
+        return records
+    except FileNotFoundError:
+        return False
+        pause()
 
 def insert_record(record, permission):
     """Adds a record to the CSV file.
@@ -143,10 +146,10 @@ def del_record(record, origin_csv):
         if r != record:
             insert_record(r, 'a')
 
-def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
+def edit_item(key, value, record, origin_csv): 
     """
-    Create a copy of a record, edit it's key's value, 
-    delete the origin record, and insert the edited copy into work-log.csv
+    Create a copy of origin record, edit it's key's value, 
+    delete origin record, and insert the edited copy into work-log.csv
 
     :param key: string of record that will be selected 
     :param value: string of record that will be edited
@@ -155,12 +158,12 @@ def edit_item(key, value, record, origin_csv):  # item is 1 of 4 record values
     :return: dictionary of the edited record
     """
 
-    e_record = copy.copy(record)  # copy the origin record
+    e_record = copy.copy(record) 
     e_record[key] = value
 
     del_record(record, origin_csv)
     insert_record(e_record, 'a')
-    
+
     return e_record
 
 
